@@ -81,6 +81,7 @@
             font-size: 16px;
             line-height: 1.6;
         }
+        
     </style>
 </head>
 <body>
@@ -88,11 +89,11 @@
         <div class="content">
             <h1>Prasanna</h1>
             <h2 id="changing">i am Backend Developer</h2>
-            <a href="https://www.linkedin.com/in/your-linkedin" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/your-github" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://leetcode.com/your-leetcode" target="_blank"><i class="fab fa-leetcode"></i> LeetCode</a>
-            <a href="https://tryhackme.com/p/your-tryhackme" target="_blank"><i class="fab fa-tryhackme"></i> TryHackMe</a>
-            <a href="https://hashnode.com/@your-hashnode" target="_blank"><i class="fab fa-hashnode"></i> Hashnode</a>
+            <a href="https://www.linkedin.com/in/prasanna1106/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/darkb0ts" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://leetcode.com/darkbat/" target="_blank"><i class="fab fa-leetcode"></i> LeetCode</a>
+            <a href="https://tryhackme.com/p/Darkbat" target="_blank"><i class="fab fa-tryhackme"></i> TryHackMe</a>
+            <a href="https://darkb0ts.hashnode.dev/" target="_blank"><i class="fab fa-hashnode"></i> Hashnode</a>
             
             
             <a href="./PrasannaK.pdf" download="your-name-resume.pdf" target="_blank"><i class="fas fa-download"></i> Download Resume</a>
@@ -118,39 +119,37 @@
             spacing: 18.00
           })
           const changingText = document.getElementById("changing");
-          const roles = ["I'm Backend Developer", "I'm Software Engineer", "I'm Bug Hunter"];
+          const roles = ["Backend Developer", "Software Engineer", "Bug Hunter"];
           let roleIndex = 0;
           let charIndex = 0;
           let isDeleting = false;
+          let delay = 100; // Initial delay of 100ms (faster typing)
       
           function typeRole() {
-            const currentRole = roles[roleIndex];
+              const currentRole = `I'm ${roles[roleIndex]}`; // Combine "I'm " with the role
+            
+              // Update text content based on typing or deleting
+              changingText.textContent = isDeleting
+                  ? currentRole.substring(0, charIndex - 1)
+                  : currentRole.substring(0, charIndex + 1);
+            
+              // Adjust delay and handle reaching the end of typing or deleting
+              if (!isDeleting && charIndex === currentRole.length) {
+                  isDeleting = true;
+                  delay = 500; // Pause before deleting (500ms)
+              } else if (isDeleting && charIndex === 0) {
+                  isDeleting = false;
+                  roleIndex = (roleIndex + 1) % roles.length;
+                  delay = 1000; // Pause before typing next role (1 second)
+              }
       
-            // Update text content based on typing or deleting
-            changingText.textContent = isDeleting
-              ? currentRole.substring(0, charIndex - 1)
-              : currentRole.substring(0, charIndex + 1);
-      
-            // Handle reaching the end of typing or deleting
-            if (!isDeleting && charIndex === currentRole.length) {
-              isDeleting = true;
-              setTimeout(typeRole, 1000); // Pause before deleting
-            } else if (isDeleting && charIndex === 0) {
-              isDeleting = false;
-              roleIndex = (roleIndex + 1) % roles.length;
-              setTimeout(typeRole, 500); // Pause before typing next role
-            }
-      
-            // Adjust typing speed based on deleting or typing
-            const typingSpeed = isDeleting ? 50 : 100;
-      
-            // Schedule the next character update with the calculated speed
-            setTimeout(typeRole, typingSpeed);
-      
-            // Increment/decrement character index based on typing/deleting
-            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+              // Schedule the next character update with the calculated delay
+              setTimeout(typeRole, delay);
+            
+              // Increment/decrement character index based on typing/deleting
+              charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
           }
-      
+            
           setTimeout(typeRole, 1000); // Start typing after 1 second
         </script>
 </body>
