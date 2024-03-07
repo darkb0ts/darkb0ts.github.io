@@ -127,8 +127,6 @@
       
           function typeRole() {
               const currentRole = `I'm ${roles[roleIndex]}`; // Combine "I'm " with the role
-            
-              // Update text content based on typing or deleting
               changingText.textContent = isDeleting
                   ? currentRole.substring(0, charIndex - 1)
                   : currentRole.substring(0, charIndex + 1);
